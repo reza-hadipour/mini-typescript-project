@@ -1,10 +1,12 @@
 import express from "express"
-import * as dotenv from "dotenv"
+// import * as dotenv from "dotenv"
+import "dotenv/config"
 import cors from "cors"
 import helmet from "helmet"
 import { Response, Request } from "express"
+import { userRouter } from "./user/user.routes"
 
-dotenv.config()
+// dotenv.config()
 
 if(!process.env.PORT){
     console.log(`No port value specified...`);
@@ -27,5 +29,6 @@ app.get('/api',(req: Request,res: Response)=>{
     res.jsonp({message:'Welcome to the API'})
 })
 
+app.use(userRouter);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
